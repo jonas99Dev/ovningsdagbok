@@ -6,6 +6,15 @@ En applikation för att logga musikövningar, byggd med **Express**, **TypeScrip
 
 ## Daglig logg
 
+## 2024-12-05
+
+     - Löste problem med Vite och beroenden genom att rensa node_modules och installera om paket.
+     - Konfigurerade Cypress för end-to-end-tester i frontend och skapade en grundläggande teststruktur.
+     - Förberedde planering för nästa steg i projektet, inklusive:
+     - Skapande av komponenter för att visa och lägga till övningsloggar.
+     - Integrering av PostgreSQL-databas i backend.
+     - Testade och verifierade att frontend-servern körs utan problem.
+
 ## 2024-12-04
 
     -	Uppdaterade tsconfig.json för att lösa problem med case-sensitivity på filnamn genom att justera include till "src/**/*".
