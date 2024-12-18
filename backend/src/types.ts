@@ -1,5 +1,6 @@
 import { Request } from "express";
 
+// Utökar Express.Request för att inkludera en user-egenskap
 declare global {
   namespace Express {
     interface Request {
@@ -8,6 +9,7 @@ declare global {
   }
 }
 
+// Representerar en användare
 export interface User {
   id: number;
   name: string;
@@ -15,21 +17,24 @@ export interface User {
   createdAt: Date; // När användaren skapades
 }
 
+// Representerar en övningslogg
 export interface PracticeLog {
   id: number;
-  userId: number; // ID för användaren som loggat övningen
-  duration: number; // Övningens längd i minuter
-  category: string; // T.ex. "Teknik" eller "Stycke"
-  description?: string; // Valfri beskrivning
-  date: Date; // Datum för övningen
+  userId: number;
+  duration: number;
+  category: string;
+  description?: string;
+  date: string; // String för JSON-kompatibilitet
 }
 
+// Generisk API-respons
 export interface ApiResponse<T> {
   status: string; // "success" eller "error"
   data: T; // Generisk typ för data
   message?: string; // Valfri meddelandesträng
 }
 
+// Exempel på användning av ApiResponse
 const response: ApiResponse<PracticeLog[]> = {
   status: "success",
   data: [
@@ -38,17 +43,16 @@ const response: ApiResponse<PracticeLog[]> = {
       userId: 1,
       duration: 30,
       category: "Teknik",
-      date: new Date(),
+      date: new Date().toISOString(), // Datum som sträng
     },
   ],
 };
 
+// Request för att skapa en ny övningslogg
 export interface CreatePracticeLogRequest {
   userId: number;
   duration: number;
   category: string;
   description?: string;
-  date: Date;
+  date: string; // String istället för Date
 }
-
-// om jag ska lägga till autentisering behöver jag utöka request

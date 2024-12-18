@@ -6,14 +6,28 @@ En applikation för att logga musikövningar, byggd med **Express**, **TypeScrip
 
 ## Daglig logg
 
+## 2024-12-10
+
+sjuk även idag
+
+## 2024-12-09
+
+Varit sjuk hela helgen och idag, inte kunnat göra ngt produktivt
+
+## 2024-12-06
+
+- inte gjort någon commit idag
+- suttit på ny branch
+- förberett fler komponenter men de är inte färdiga
+
 ## 2024-12-05
 
-     - Löste problem med Vite och beroenden genom att rensa node_modules och installera om paket.
-     - Konfigurerade Cypress för end-to-end-tester i frontend och skapade en grundläggande teststruktur.
-     - Förberedde planering för nästa steg i projektet, inklusive:
-     - Skapande av komponenter för att visa och lägga till övningsloggar.
-     - Integrering av PostgreSQL-databas i backend.
-     - Testade och verifierade att frontend-servern körs utan problem.
+- Löste problem med Vite och beroenden genom att rensa node_modules och installera om paket.
+- Konfigurerade Cypress för end-to-end-tester i frontend och skapade en grundläggande teststruktur.
+- Förberedde planering för nästa steg i projektet, inklusive:
+- Skapande av komponenter för att visa och lägga till övningsloggar.
+- Integrering av PostgreSQL-databas i backend.
+- Testade och verifierade att frontend-servern körs utan problem.
 
 ## 2024-12-04
 
