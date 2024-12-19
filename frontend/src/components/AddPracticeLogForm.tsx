@@ -13,40 +13,40 @@ const AddPracticeLogForm: React.FC<AddPracticeLogFormProps> = ({
   onAddLog,
 }) => {
   const [category, setCategory] = useState("");
-  const [duration, setDuration] = useState(0);
+  const [duration, setDuration] = useState<number | "">("");
   const [description, setDescription] = useState("");
-  const [error, setError] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!category || duration <= 0) {
-      setError("Kategori och längd måste fyllas i korrekt.");
+    if (!category || !duration) {
+      setErrorMessage("Alla obligatoriska fält måste fyllas i!");
       return;
     }
 
     const log = {
       date: new Date().toISOString().split("T")[0], // dagens datum
-      duration,
+      duration: Number(duration),
       category,
       description,
     };
 
     onAddLog(log);
-
     setCategory("");
-    setDuration(0);
+    setDuration("");
     setDescription("");
-    setError("");
+    setErrorMessage(""); // Töm felmeddelandet
   };
 
   return (
     <form onSubmit={handleSubmit} style={{ marginTop: "20px" }}>
       <h2>Lägg till övningslogg</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       <div>
         <label>Kategori: </label>
         <input
+          name="category"
           type="text"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
@@ -56,15 +56,19 @@ const AddPracticeLogForm: React.FC<AddPracticeLogFormProps> = ({
       <div>
         <label>Längd (minuter): </label>
         <input
+          name="duration"
           type="number"
           value={duration}
-          onChange={(e) => setDuration(Number(e.target.value))}
+          onChange={(e) =>
+            setDuration(e.target.value === "" ? "" : Number(e.target.value))
+          }
           required
         />
       </div>
       <div>
         <label>Beskrivning (valfritt): </label>
         <textarea
+          name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
