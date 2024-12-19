@@ -1,35 +1,49 @@
 import { Router, Request, Response } from "express";
 import { PracticeLog } from "../types"; // Kontrollera sökvägen
 import pool from "../db";
+
 const router = Router();
 
 let logs: PracticeLog[] = [];
 
 // POST /logs - Lägg till en ny logg
-router.post("/", (req: Request, res: Response) => {
-  const newLogData = req.body as Omit<PracticeLog, "id">;
+router.post("/", async (req: Request, res: Response) => {
+  const { date, duration, category, description } = req.body;
 
-  console.log("Request body:", newLogData); // Kontrollera inkommande data
+  console.log("Request body:", req.body); // Kontrollera inkommande data
 
   // Validering av inkommande data
-  if (!newLogData.date || !newLogData.duration || !newLogData.category) {
+  if (!date || !duration || !category) {
     res.status(400).json({ message: "Invalid data, missing required fields" });
   }
 
-  // Generera en ny logg med unikt ID
-  const newLog: PracticeLog = {
-    ...newLogData,
-    id: logs.length > 0 ? logs[logs.length - 1].id + 1 : 1,
-  };
-
-  logs.push(newLog); // Lägg till i listan
-
-  res.status(201).json({ message: "Log added", data: newLog });
+  try {
+    const result = await pool.query(
+      "INSERT INTO practice_logs (date, duration, category, description) VALUES ($1, $2, $3, $4) RETURNING *",
+      [date, duration, category, description || null]
+    );
+    res.status(201).json({ message: "Log added", data: result.rows[0] });
+  } catch (error) {
+    console.error("Error adding log:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
-// GET /logs - Hämta alla loggar
-router.get("/", (_req: Request, res: Response) => {
-  res.status(200).json({ message: "Logs retrieved", data: logs });
+router.get("/", async (_req: Request, res: Response) => {
+  console.log("GET /logs called");
+  try {
+    // Hämta alla loggar från databasen
+    const result = await pool.query("SELECT * FROM practice_logs");
+
+    res.status(200).json({ message: "Logs retrieved", data: result.rows });
+  } catch (error) {
+    console.error("Error fetching logs:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.get("/test", (_req: Request, res: Response) => {
+  res.send("Logs router test works!");
 });
 
 export default router;
