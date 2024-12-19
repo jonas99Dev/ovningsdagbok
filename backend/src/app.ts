@@ -1,33 +1,43 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-// import { User } from "./types";
 import usersRouter from "./routes/users";
 import logsRouter from "./routes/logs";
-import { PracticeLog } from "../src/types";
 
 const app = express();
+
+console.log("Initializing Express app...");
+
+// Middleware för att hantera JSON
+app.use(express.json());
+console.log("JSON middleware added");
 
 // Middleware för CORS
 app.use(
   cors({
-    origin: "http://localhost:3000", // Tillåt endast frontend från denna domän
+    origin: "http://localhost:4000", // Tillåt endast frontend från denna domän
     methods: ["GET", "POST", "PUT", "DELETE"], // Tillåtna HTTP-metoder
     credentials: true, // Tillåter att cookies skickas med förfrågningar
   })
 );
-// Tillåt alla domäner som standard
+console.log("CORS middleware added");
 
-// Middleware för att hantera JSON
-app.use(express.json());
-
-// let logs: PracticeLog[] = [];
-
+// Lägg till routers
+console.log("Adding logs router at /logs");
 app.use("/logs", logsRouter);
+
+console.log("Adding users router at /users");
 app.use("/users", usersRouter);
 
-// Routes
+// Test route för root
 app.get("/", (_req: Request, res: Response) => {
-  res.end("Hello, world!\n");
+  console.log("Root route '/' accessed");
+  res.send("Hello, world!\n");
+});
+
+// Felsökning: Logga inkommande förfrågningar
+app.use((req: Request, _res: Response, next) => {
+  console.log(`Incoming request: ${req.method} ${req.url}`);
+  next();
 });
 
 export default app;
