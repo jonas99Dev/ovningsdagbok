@@ -1,0 +1,33 @@
+name: Run Cypress Tests
+
+on:
+  push:
+    branches:
+      - main # Kör tester på main
+  pull_request: # Kör tester på pull requests
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start development server
+        run: npm run dev &
+        env:
+          CI: true
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome # Du kan använda 'electron' för snabbare körningar
