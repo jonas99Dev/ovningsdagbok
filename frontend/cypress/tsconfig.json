@@ -1,0 +1,8 @@
+{
+  "extends": "../tsconfig.json", // Ärver den övergripande tsconfig
+  "compilerOptions": {
+    "jsx": "preserve",
+    "types": ["cypress", "@types/react18"]
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
+}

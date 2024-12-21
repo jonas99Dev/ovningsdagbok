@@ -1,3 +1,7 @@
+/// <reference types="cypress" />
+
+import "../support/commands";
+
 describe("Startsidan", () => {
   it("ska visa sidhuvudet och dagens datum", () => {
     cy.visit("/");

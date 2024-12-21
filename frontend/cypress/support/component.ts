@@ -1,20 +1,13 @@
 import { mount } from "cypress/react18";
+import "./commands";
 
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      mount: typeof mount;
-    }
-  }
-}
+type Mount = typeof mount;
 
 Cypress.Commands.add("mount", mount);
 
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      mount: typeof mount;
-    }
+declare module "cypress" {
+  interface Chainable {
+    mount: Mount;
   }
 }
 
