@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import PracticeLogList from "./components/PracticeLogList";
 import AddPracticeLogForm from "./components/AddPracticeLogForm";
 import { PracticeLog } from "./types";
+import PitchButton from "./components/PitchButton";
 import "./App.css";
 
 const App: React.FC = () => {
@@ -50,6 +51,7 @@ const App: React.FC = () => {
       <div style={{ textAlign: "center", marginTop: "50px" }}>
         <p>Välkommen till din övningsdagbok!</p>
         {message && <p style={{ color: "green" }}>{message}</p>}
+        <PitchButton />
       </div>
 
       <div>
