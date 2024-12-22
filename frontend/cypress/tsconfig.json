@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json", // Ärver den övergripande tsconfig
   "compilerOptions": {
     "jsx": "preserve",
-    "types": ["cypress", "react", "react-dom"]
+    "types": ["cypress", "@types/react", "@types/react-dom"]
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "../node_modules/cypress"]
 }

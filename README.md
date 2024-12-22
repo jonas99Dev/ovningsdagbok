@@ -2,17 +2,51 @@
 
 En applikation för att logga musikövningar, byggd med **Express**, **TypeScript**, och kommer att innehålla en **frontend med React** samt **databas med PostgreSQL**.
 
+## för att köra det:
+
+-- i frontend: npm run dev
+-- i backend: npm run dev
+
+## UML-diagram ligger som pdf i roten: ovningsdagbok_uml.pdf
+
 ---
 
 ## Daglig logg
 
-## 2024-12-10
+## 2024-12-22
 
-sjuk även idag
+-- cypress kraschade igen, fik uppdatera mime
+-- fixat testerna
+-- gjort uml-diagram
+-- lagt till PitchButton komponent med test
+
+## 2024-12-21
+
+-- tdd-test
+-- fixat lint-problem
+
+## 2024-12-20
+
+-- fixat komponent-testet
+-- lagt till git actions
+
+## 2024-12-19
+
+-- kopplat fullstack
+-- börjat med tdd
+-- lagt till test för delete
+
+## 2024-12-18
+
+-- jobbat ikapp lite
+
+## 2024-12-10 - 2024-12-17
+
+-- varit sjuk
 
 ## 2024-12-09
 
-Varit sjuk hela helgen och idag, inte kunnat göra ngt produktivt
+-- Varit sjuk hela helgen och idag, inte kunnat göra ngt produktivt
 
 ## 2024-12-06
 

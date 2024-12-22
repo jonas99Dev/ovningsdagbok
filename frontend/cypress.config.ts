@@ -6,7 +6,7 @@ import { createEsbuildPlugin } from "@badeball/cypress-cucumber-preprocessor/esb
 export default defineConfig({
   e2e: {
     baseUrl: "http://localhost:4000",
-    specPattern: "cypress/e2e/**/*.feature",
+    specPattern: "cypress/e2e/**/*.{feature,cy.ts,ts,tsx}",
     supportFile: false,
     // @ts-ignore
     stepDefinitions: "cypress/support/step_definitions",
@@ -23,6 +23,13 @@ export default defineConfig({
       );
 
       return config;
+    },
+  },
+
+  component: {
+    devServer: {
+      framework: "react",
+      bundler: "vite",
     },
   },
 });

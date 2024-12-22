@@ -8,3 +8,10 @@ CREATE TABLE practice_logs (
 
 INSERT INTO practice_logs (date, duration, category, description)
 VALUES ('2024-12-18', 30, 'Teknik', 'Skalövningar');
+
+-- Skapa tabellen Instruments
+CREATE TABLE Instruments (
+    id SERIAL PRIMARY KEY,       -- Primärnyckel
+    name VARCHAR(255) NOT NULL,  -- Instrumentets namn (t.ex. "saxofon")
+    type VARCHAR(255) NOT NULL   -- Typ av instrument (t.ex. "blåsinstrument")
+);
