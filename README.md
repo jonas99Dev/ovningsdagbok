@@ -2,6 +2,16 @@
 
 En applikation för att logga musikövningar, byggd med **Express**, **TypeScript**, och kommer att innehålla en **frontend med React** samt **databas med PostgreSQL**.
 
+## mål
+
+-- Mitt mål var att göra en fungerande övningsdagbok som jag ska kunna använda. Eftersom jag blev sjuk fick jag jag verkligen minska mina krav.
+
+-- Jag fick skippa CRUD, all design och hålla mig till ett fåtal komponenter.
+
+## erfarenhet
+
+Jag har fått kämpa väldigt mycket med att konfigurera cypress.config.js, tsconfig.json och eslint.config.js. Cypress är säkert bra när man kan det men har krånglat väldigt mycket för mig den här gången. Jag ser fram emot att jobba me ddet och lära mig det bättre.
+
 ## för att köra det:
 
 -- i frontend: npm run dev
