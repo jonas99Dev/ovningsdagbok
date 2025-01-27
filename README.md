@@ -25,9 +25,18 @@ psql -U postgres -d ovningsdagbok -f init.sql
 
 ## Daglig logg
 
+## 2025-01-26
+
+fix(tests): Åtgärdat och validerat samtliga Cypress- och komponenttester
+
+- Fixade problem med "updateLog" i my-given-when-then.cy.ts
+- Justerade regex och matchningslogik för lista i myTDD.cy.ts
+- Implementerade och validerade funktionalitet för PitchButton
+- Säkerställde att alla komponent- och end-to-end-tester fungerar
+
 ## 2024-12-22
 
--- cypress kraschade igen, fik uppdatera mime
+-- cypress kraschade igen, fick uppdatera mime
 -- fixat testerna
 -- gjort uml-diagram
 -- lagt till PitchButton komponent med test
