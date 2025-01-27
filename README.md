@@ -14,6 +14,8 @@ Jag har fått kämpa väldigt mycket med att konfigurera cypress.config.js, tsco
 
 ## för att köra det:
 
+psql -U postgres -d ovningsdagbok -f init.sql
+
 -- i frontend: npm run dev
 -- i backend: npm run dev
 

@@ -8,10 +8,9 @@ describe("PitchButton Component", () => {
     cy.contains("button", "Play Pitch Tone").should("be.visible");
   });
 
-  it("ska trigga ett klickevent när knappen klickas", () => {
-    const onClickMock = cy.stub(); // Mockad callback för att testa klick
-    mount(<PitchButton onClick={onClickMock} />);
+  it("ska visa meddelandet 'Playing pitch tone' när knappen klickas", () => {
+    mount(<PitchButton />);
     cy.contains("button", "Play Pitch Tone").click();
-    expect(onClickMock).to.have.been.called; // Verifiera att eventet triggas
+    cy.contains("p", "Playing pitch tone").should("be.visible"); // Kontrollera att meddelandet visas
   });
 });

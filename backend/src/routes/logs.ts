@@ -42,6 +42,61 @@ router.get("/", async (_req: Request, res: Response) => {
   }
 });
 
+// PUT /logs/:id - Uppdatera en befintlig logg
+router.put("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params; // ID för loggen som ska uppdateras
+  const { date, duration, category, description } = req.body; // Uppdaterade data
+
+  // Validera inkommande data
+  if (!date || !duration || !category) {
+    res.status(400).json({ message: "Invalid data, missing required fields" });
+    return;
+  }
+
+  try {
+    // Uppdatera loggen i databasen
+    const result = await pool.query(
+      "UPDATE practice_logs SET date = $1, duration = $2, category = $3, description = $4 WHERE id = $5 RETURNING *",
+      [date, duration, category, description || null, id]
+    );
+
+    // Om ingen rad uppdaterades, returnera ett fel
+    if (result.rowCount === 0) {
+      res.status(404).json({ message: "Log not found" });
+      return;
+    }
+
+    // Skicka tillbaka den uppdaterade loggen
+    res.status(200).json({ message: "Log updated", data: result.rows[0] });
+  } catch (error) {
+    console.error("Error updating log:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// DELETE /logs/:id - Radera en befintlig logg
+router.delete("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params; // ID för loggen som ska raderas
+
+  try {
+    // Ta bort loggen från databasen
+    const result = await pool.query("DELETE FROM practice_logs WHERE id = $1", [
+      id,
+    ]);
+
+    // Kontrollera om någon rad faktiskt raderades
+    if (result.rowCount === 0) {
+      res.status(404).json({ message: "Log not found" });
+      return;
+    }
+
+    res.status(200).json({ message: "Log deleted" });
+  } catch (error) {
+    console.error("Error deleting log:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 router.get("/test", (_req: Request, res: Response) => {
   res.send("Logs router test works!");
 });

@@ -44,6 +44,53 @@ const App: React.FC = () => {
     }
   };
 
+  const handleEditLog = async (updatedLog: PracticeLog) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5001/logs/${updatedLog.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedLog),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update log");
+      }
+
+      const result = await response.json();
+
+      // Uppdatera state med den redigerade loggen
+      setLogs((prevLogs) =>
+        prevLogs.map((log) => (log.id === result.data.id ? result.data : log))
+      );
+      setMessage("Loggen har uppdaterats!");
+    } catch (error) {
+      console.error("Error updating log:", error);
+      setMessage("Kunde inte uppdatera loggen. Försök igen.");
+    }
+  };
+
+  const handleDeleteLog = async (id: number) => {
+    try {
+      const response = await fetch(`http://localhost:5001/logs/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete log");
+      }
+
+      // Uppdatera state för att ta bort loggen
+      setLogs((prevLogs) => prevLogs.filter((log) => log.id !== id));
+      setMessage("Loggen har raderats!");
+    } catch (error) {
+      console.error("Error deleting log:", error);
+      setMessage("Kunde inte radera loggen. Försök igen.");
+    }
+  };
+
   return (
     <div>
       <Header studentName="Jonas Hultberg" />
@@ -56,7 +103,11 @@ const App: React.FC = () => {
 
       <div>
         <AddPracticeLogForm onAddLog={handleAddLog} />
-        <PracticeLogList logs={logs} />
+        <PracticeLogList
+          logs={logs}
+          onEditLog={handleEditLog} // Skicka implementeringen av redigering
+          onDeleteLog={handleDeleteLog} // Skicka raderingsfunktionen
+        />
       </div>
     </div>
   );
